@@ -51,7 +51,7 @@ query = query.format(",".join(columns), ",?" * len(columns))
 
 for ID, rest in data.iteritems():
 	keys = (ID,) + tuple(rest[c] for c in columns)
-    cur.execute(query, keys)
+	cur.execute(query, keys)
 
 #close database
 conn.commit()
