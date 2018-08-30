@@ -43,7 +43,7 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 #create new table
 cur = conn.cursor()
-items = data.values()[0].values()
+items = list(data.values())[0].values()
 columns = list(items.keys())
 query = "insert into popular-items (ID,{0}) values (?{1})"
 query = query.format(",".join(columns), ",?" * len(columns))
