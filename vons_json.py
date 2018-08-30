@@ -36,7 +36,6 @@ results = r.json()['products']
 data = {}
 for item in results:
     data[item.pop('id')] = item
-data = json.load(data)
 
 #set up database
 DATABASE_URL = os.environ['DATABASE_URL']
@@ -44,12 +43,12 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 #create new table
 cur = conn.cursor()
-items = data.itervalues().next()
+items = data.values().next()
 columns = list(items.keys())
 query = "insert into popular-items (ID,{0}) values (?{1})"
 query = query.format(",".join(columns), ",?" * len(columns))
 
-for ID, rest in data.iteritems():
+for ID, rest in data.items():
 	keys = (ID,) + tuple(rest[c] for c in columns)
 	cur.execute(query, keys)
 
