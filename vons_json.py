@@ -1,6 +1,5 @@
 import requests
 import json
-import re
 import time
 import datetime
 import os
@@ -37,6 +36,7 @@ results = r.json()['products']
 data = {}
 for item in results:
     data[item.pop('id')] = item
+data = json.load(data)
 
 #set up database
 DATABASE_URL = os.environ['DATABASE_URL']
