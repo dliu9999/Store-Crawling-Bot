@@ -62,7 +62,7 @@ for ID, rest in data.items():
 	cur.execute(query, keys)
 
 #delete columns
-to_keep = ["price", "name", "sellbyweight", "unitofmeasure", "aislename", "shelfname", "priceper"]
+to_keep = ["price", "name", "sellByWeight", "unitOfMeasure", "aisleName", "shelfName", "pricePer"]
 for name in columns:
 	if name not in to_keep:
 		to_delete = "ALTER TABLE popular DROP COLUMN {0}".format(name)
