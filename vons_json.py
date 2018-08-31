@@ -66,7 +66,7 @@ while True:
 	for ID, rest in data.items():
 		keys = (ID,) + tuple([rest[c] for c in columns if c in to_keep] + [current_date])
 		print(keys)
-		cur.execute(to_keep, keys)
+		cur.execute(query, keys)
 
 	#close database
 	conn.commit()
