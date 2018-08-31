@@ -46,8 +46,8 @@ while True:
 	cur = conn.cursor()
 
 	#get column names
-	items = list(data.values())[0].keys()
-	columns = list(items)
+	#items = list(data.values())[0].keys()
+	#columns = list(items)
 
 	#create strings for cur.execute
 	to_keep = ["price", "name", "sellByWeight", "unitOfMeasure", "aisleName", "shelfName", "pricePer","day"]
@@ -67,7 +67,7 @@ while True:
 	for ID, rest in data.items():
 		keys = (ID,) + tuple([rest[c] for c in columns if c in to_keep] + [current_date])
 		print(keys)
-		cur.execute(query, keys)
+		cur.execute(to_keep, keys)
 
 	#close database
 	conn.commit()
