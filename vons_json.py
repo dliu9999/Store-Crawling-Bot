@@ -43,17 +43,26 @@ conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 #create new table
 cur = conn.cursor()
+
+#get column names
 items = list(data.values())[0].keys()
 columns = list(items)
-query = "INSERT INTO popular(ID,{0}) VALUES (%s{1})"
-query = query.format(",".join(columns), ",%s" * len(columns))
+
+#create strings for cur.execute
 table_columns = [i + " TEXT" for i in columns]
 table = "CREATE TABLE popular(ID TEXT,{0})".format(",".join(table_columns))
-cur.execute(table)
+query = "INSERT INTO popular(ID,{0}) VALUES (%s{1})"
+query = query.format(",".join(columns), ",%s" * len(columns))
+print(table)
 
+#write to postgres
+cur.execute(table)
 for ID, rest in data.items():
 	keys = (ID,) + tuple(rest[c] for c in columns)
 	cur.execute(query, keys)
+
+#delete columns
+to_keep = []
 
 #close database
 conn.commit()
