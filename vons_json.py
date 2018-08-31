@@ -68,7 +68,7 @@ while True:
 	#insert data
 	current_date = datetime.datetime.now().strftime("%Y-%m-%d")
 	for ID, rest in data.items():
-		keys = (ID,) + tuple(rest[c] for c in columns if c not in to_keep) + (,current_date)
+		keys = (ID,) + tuple([rest[c] for c in columns if c not in to_keep] + current_date)
 		cur.execute(query, keys)
 
 	#close database
