@@ -46,8 +46,8 @@ while True:
 	cur = conn.cursor()
 
 	#get column names
-	#items = list(data.values())[0].keys()
-	#columns = list(items)
+	items = list(data.values())[0].keys()
+	columns = list(items)
 
 	#create strings for cur.execute
 	to_keep = ["price", "name", "sellByWeight", "unitOfMeasure", "aisleName", "shelfName", "pricePer"]
