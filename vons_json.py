@@ -46,7 +46,7 @@ cur = conn.cursor()
 items = list(data.values())[0].keys()
 columns = list(items)
 query = "INSERT INTO popular(ID,{0}) VALUES (%s{1})"
-query = query.format(",".join(columns), ",?" * len(columns))
+query = query.format(",".join(columns), ",%s" * len(columns))
 table_columns = [i + " TEXT" for i in columns]
 table = "CREATE TABLE popular(ID TEXT,{0})".format(",".join(table_columns))
 cur.execute(table)
