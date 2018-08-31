@@ -50,12 +50,11 @@ while True:
 	#columns = list(items)
 
 	#create strings for cur.execute
-	to_keep = ["price", "name", "sellByWeight", "unitOfMeasure", "aisleName", "shelfName", "pricePer","day"]
+	to_keep = ["price", "name", "sellByWeight", "unitOfMeasure", "aisleName", "shelfName", "pricePer"]
 	table_columns = [i + " TEXT" for i in to_keep]
 	table = "CREATE TABLE popular(ID TEXT,{0},day TEXT)".format(",".join(table_columns))
 	query = "INSERT INTO popular(ID,{0},day TEXT) VALUES (%s{1})"
 	query = query.format(",".join(to_keep), ",%s" * len(to_keep))
-	print(table)
 
 	#create table
 	if times_ran == 0:
