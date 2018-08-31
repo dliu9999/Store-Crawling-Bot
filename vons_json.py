@@ -50,25 +50,23 @@ while True:
 	columns = list(items)
 
 	#create strings for cur.execute
-	table_columns = [i + " TEXT" for i in columns]
+	to_keep = ["price", "name", "sellByWeight", "unitOfMeasure", "aisleName", "shelfName", "pricePer","day"]
+	table_columns = [i + " TEXT" for i in columns if i in to_keep]
 	table = "CREATE TABLE popular(ID TEXT,{0},day TEXT)".format(",".join(table_columns))
 	query = "INSERT INTO popular(ID,{0},day TEXT) VALUES (%s{1})"
 	query = query.format(",".join(columns), ",%s" * len(columns))
-	to_keep = ["price", "name", "sellByWeight", "unitOfMeasure", "aisleName", "shelfName", "pricePer","day"]
+	print(table)
 
 	#create table
 	if times_ran == 0:
 		cur.execute(table)
-		for name in columns:
-			if name not in to_keep:
-				to_delete = "ALTER TABLE popular DROP COLUMN {0}".format(name)
-				cur.execute(to_delete)
 		times_ran = 1
 
 	#insert data
 	current_date = datetime.datetime.now().strftime("%Y-%m-%d")
 	for ID, rest in data.items():
-		keys = (ID,) + tuple([rest[c] for c in columns if c not in to_keep] + [current_date])
+		keys = (ID,) + tuple([rest[c] for c in columns if c in to_keep] + [current_date])
+		print(keys)
 		cur.execute(query, keys)
 
 	#close database
