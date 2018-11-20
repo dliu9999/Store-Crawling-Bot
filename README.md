@@ -1,9 +1,9 @@
-# test-scrape-bot
+# json-scraping-bot
 
 Requirements:
 1. HCI installed
 2. Postgres set up locally
-3. pip install selenium, beautifulsoup4, psycopg2
+3. pip install beautifulsoup4, psycopg2
 
 To use:
 1. Clone repo
