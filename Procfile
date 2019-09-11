@@ -1,2 +1,2 @@
 # Procfile
-worker: python vons_json.py
+worker: python scripts/json_scrape.py
